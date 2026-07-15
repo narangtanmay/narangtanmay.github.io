@@ -79,13 +79,18 @@
   }
   .card-media img{ width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
 
-  .card-media.term{ align-items:flex-start; justify-content:flex-start; padding:1.1rem 1.3rem; }
-  .card-media.term .caption{
-    position:absolute; top:.7rem; right:.9rem; font-family:ui-monospace,"SF Mono",Menlo,monospace;
-    font-size:.62rem; letter-spacing:.08em; color:#6B6B6B; text-transform:uppercase;
+  .card-media.term{ flex-direction:column; align-items:stretch; justify-content:flex-start; padding:0; }
+  .term-bar{ display:flex; align-items:center; gap:.4rem; padding:.65rem .9rem; border-bottom:1px solid #232323; flex-shrink:0; }
+  .term-bar i{ width:.55rem; height:.55rem; border-radius:50%; display:block; }
+  .term-bar i:nth-child(1){ background:#FF5F57; }
+  .term-bar i:nth-child(2){ background:#FEBC2E; }
+  .term-bar i:nth-child(3){ background:#28C840; }
+  .term-bar span{
+    margin-left:auto; font-family:ui-monospace,"SF Mono",Menlo,monospace;
+    font-size:.62rem; letter-spacing:.06em; color:#6B6B6B;
   }
   .card-media.term pre{
-    margin:0; font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.72rem;
+    margin:0; padding:1rem 1.3rem; font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.72rem;
     line-height:1.65; color:#8FE8A6; white-space:pre-wrap;
   }
   .card-media.term .bad{ color:#FF6A4D; }
@@ -126,7 +131,7 @@
   <h1>FIND. <span class="a">VERIFY.</span><br>SHIP.</h1>
 
   <div class="brief">
-    <p>I don't trust an AI's output until I've checked it against something real — a graph, a backtest, a live exploit. This is the record of that habit.</p>
+    <p>Everything below got checked against something real — a graph, a backtest, a live system — before I called it done.</p>
     <a class="cta" href="mailto:tanmay.narang10@gmail.com">GET IN TOUCH</a>
   </div>
 
@@ -153,14 +158,14 @@
     </div>
     <div class="card">
       <div class="card-media term">
-        <span class="caption">Illustrative — IDOR pattern</span>
+        <div class="term-bar"><i></i><i></i><i></i><span>idor.http — illustrative</span></div>
         <pre>GET /api/user/8271/profile
 Authorization: Bearer &lt;token&gt;
-&lt;- 200 OK  { "user_id": 8271, ... }
+&lt;- 200 OK  {"user_id": 8271, ...}
 
 GET /api/user/8272/profile
 Authorization: Bearer &lt;<span class="dim">same token</span>&gt;
-&lt;- 200 OK  { "user_id": 8272, ... } <span class="bad">← should be 403</span></pre>
+<span class="bad">&lt;- 200 OK  {"user_id": 8272, ...}  // expected 403</span></pre>
       </div>
       <div>
         <div class="tag">REPORTED &amp; ACKNOWLEDGED</div>
@@ -199,7 +204,7 @@ Authorization: Bearer &lt;<span class="dim">same token</span>&gt;
 
   <footer>
     <span>© 2026</span>
-    <span><a href="cv.pdf">CV</a> · <a href="https://github.com/narangtanmay">GitHub</a> · <a href="https://www.linkedin.com/in/tanmaynarang/">LinkedIn</a> · <a href="mailto:tanmay.narang10@gmail.com">Email</a></span>
+    <span><a href="https://github.com/narangtanmay">GitHub</a> · <a href="https://www.linkedin.com/in/tanmaynarang/">LinkedIn</a> · <a href="mailto:tanmay.narang10@gmail.com">Email</a></span>
   </footer>
 </div>
 </body>
