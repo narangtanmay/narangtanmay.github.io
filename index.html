@@ -1,11 +1,206 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <!-- This line handles the instant redirect -->
-    <meta http-equiv="refresh" content="0; url='cv.pdf'" />
-    <title>Redirecting...</title>
-  </head>
-  <body>
-    <p>Loading CV... if it doesn't open, <a href="cv.pdf">click here</a>.</p>
-  </body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tanmay Narang</title>
+<meta name="description" content="CS student at TUM, security/applied-AI researcher at Fraunhofer AISEC.">
+<style>
+  :root{ --bg:#FAFAFA; --ink:#0A0A0A; --line:#DCDCDC; --muted:#6B6B6B; --accent:#FF3D1A; }
+  @media (prefers-color-scheme: dark){ :root{ --bg:#0A0A0A; --ink:#FAFAFA; --line:#2A2A2A; --muted:#9A9A9A; --accent:#FF5A38; } }
+  :root[data-theme="dark"]{ --bg:#0A0A0A; --ink:#FAFAFA; --line:#2A2A2A; --muted:#9A9A9A; --accent:#FF5A38; }
+  :root[data-theme="light"]{ --bg:#FAFAFA; --ink:#0A0A0A; --line:#DCDCDC; --muted:#6B6B6B; --accent:#FF3D1A; }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"Helvetica Neue", Arial, sans-serif;
+  }
+  .wrap{ max-width:1400px; margin:0 auto; padding:0 2.5rem; }
+
+  nav{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:1.6rem 0; border-bottom:1px solid var(--line);
+  }
+  nav .name{ font-weight:800; font-size:1.15rem; letter-spacing:-.01em; }
+  nav .loc{ font-size:.8rem; color:var(--muted); border-left:1px solid var(--line); padding-left:1rem; margin-left:1rem; }
+  nav .brand{ display:flex; align-items:center; }
+
+  .tags{
+    display:flex; justify-content:space-between; padding:1.4rem 0;
+    font-size:.72rem; font-weight:600; letter-spacing:.08em; color:var(--muted);
+  }
+
+  h1{
+    font-size:clamp(2.6rem, 8.6vw, 8.4rem); font-weight:800; line-height:.98;
+    letter-spacing:-.03em; margin:0; text-wrap:balance;
+  }
+  h1 .a{ color:var(--accent); }
+
+  .brief{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:2rem;
+    border-top:1px solid var(--line); padding:1.6rem 0 3rem; flex-wrap:wrap;
+  }
+  .brief p{ max-width:42ch; color:var(--muted); font-size:.95rem; margin:0; }
+  .cta{
+    background:var(--accent); color:#fff; border:none; padding:.9rem 1.6rem;
+    font-size:.72rem; font-weight:700; letter-spacing:.08em; white-space:nowrap; cursor:pointer;
+    text-decoration:none; display:inline-block;
+  }
+
+  .triad{
+    display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line);
+  }
+  .triad div{ padding:2.2rem 0; }
+  .triad div:not(:last-child){ border-right:1px solid var(--line); padding-right:1.5rem; }
+  .triad div:not(:first-child){ padding-left:1.5rem; }
+  .triad h3{ font-size:1.05rem; font-weight:800; margin:0 0 .6rem; }
+  .triad p{ font-size:.85rem; color:var(--muted); margin:0; }
+
+  .section-label{
+    font-size:.72rem; font-weight:600; letter-spacing:.08em; color:var(--muted);
+    border-top:1px solid var(--line); padding-top:2rem; margin-top:1rem;
+  }
+  h2.section-title{ font-size:2.4rem; font-weight:800; letter-spacing:-.02em; margin:.4rem 0 2rem; }
+
+  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); margin-bottom:5rem; }
+  .card{ background:var(--bg); padding:2.2rem; min-height:220px; display:flex; flex-direction:column; justify-content:space-between; overflow:hidden; }
+  .card .tag{ font-size:.7rem; font-weight:700; letter-spacing:.06em; color:var(--accent); }
+  .card{ border-left:3px solid var(--accent); }
+  .card h3{ font-size:1.5rem; font-weight:800; margin:.8rem 0 .6rem; letter-spacing:-.01em; }
+  .card p{ font-size:.88rem; color:var(--muted); margin:0; }
+  .card .meta{ font-size:.75rem; color:var(--muted); margin-top:1.2rem; }
+  .card .meta a{ color:var(--muted); }
+
+  .card-media{
+    margin:-2.2rem -2.2rem 1.4rem; aspect-ratio:16/10; overflow:hidden;
+    border-bottom:1px solid var(--line); background:#0A0A0A;
+    display:flex; align-items:center; justify-content:center; position:relative;
+  }
+  .card-media img{ width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
+
+  .card-media.term{ align-items:flex-start; justify-content:flex-start; padding:1.1rem 1.3rem; }
+  .card-media.term .caption{
+    position:absolute; top:.7rem; right:.9rem; font-family:ui-monospace,"SF Mono",Menlo,monospace;
+    font-size:.62rem; letter-spacing:.08em; color:#6B6B6B; text-transform:uppercase;
+  }
+  .card-media.term pre{
+    margin:0; font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.72rem;
+    line-height:1.65; color:#8FE8A6; white-space:pre-wrap;
+  }
+  .card-media.term .bad{ color:#FF6A4D; }
+  .card-media.term .dim{ color:#6B6B6B; }
+
+  .card-media.spark{ background:var(--bg); flex-direction:column; align-items:stretch; padding:1.1rem 1.3rem; }
+  .card-media.spark .caption{
+    font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.62rem; letter-spacing:.08em;
+    color:var(--muted); text-transform:uppercase; margin-bottom:.4rem;
+  }
+  .card-media.spark svg{ width:100%; height:100%; }
+
+  footer{
+    border-top:1px solid var(--line); padding:1.6rem 0 3rem;
+    display:flex; justify-content:space-between; font-size:.8rem; color:var(--muted); flex-wrap:wrap; gap:.5rem;
+  }
+  footer a{ color:var(--ink); }
+
+  @media (max-width: 640px){
+    .triad{ grid-template-columns:1fr; }
+    .triad div:not(:last-child){ border-right:none; border-bottom:1px solid var(--line); padding-right:0; padding-bottom:1.5rem; }
+    .triad div:not(:first-child){ padding-left:0; padding-top:1.5rem; }
+    .grid{ grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <div class="brand"><span class="name">Tanmay Narang</span><span class="loc">MUNICH, DE</span></div>
+    <div class="loc">TUM · FRAUNHOFER AISEC</div>
+  </nav>
+
+  <div class="tags">
+    <span>SECURITY</span><span>APPLIED AI</span><span>VERIFIED</span><span>2026</span>
+  </div>
+
+  <h1>FIND. <span class="a">VERIFY.</span><br>SHIP.</h1>
+
+  <div class="brief">
+    <p>I don't trust an AI's output until I've checked it against something real — a graph, a backtest, a live exploit. This is the record of that habit.</p>
+    <a class="cta" href="mailto:tanmay.narang10@gmail.com">GET IN TOUCH</a>
+  </div>
+
+  <div class="triad">
+    <div><h3>Research</h3><p>Fraunhofer AISEC — testing whether LLMs can be trusted to flag security-relevant code via Code Property Graphs.</p></div>
+    <div><h3>Build</h3><p>Hackathon-tested systems: exec-comp anomaly detection, graph-based knowledge retrieval, on-device elder-care sensing.</p></div>
+    <div><h3>Verify</h3><p>Found and responsibly disclosed a live authorization exploit — confirmed end-to-end, not just in source.</p></div>
+  </div>
+
+  <div class="section-label">FEATURED WORK</div>
+  <h2 class="section-title">Shipped &amp; Judged.</h2>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-media">
+        <img src="images/proxyengine.png" alt="ProxyEngine report screen showing pay-audit metrics for Bayer AG" loading="lazy">
+      </div>
+      <div>
+        <div class="tag">TRACK WINNER — TUM SCIENCE HACKATHON</div>
+        <h3>ProxyEngine</h3>
+        <p>Flags excessive executive pay from unstructured disclosures. Backtested against real shareholder revolts at Bayer, Continental, Software AG — 129 real companies, live on ORBIS data.</p>
+      </div>
+      <div class="meta"><a href="https://github.com/narangtanmay/proxyengine">github.com/narangtanmay/proxyengine</a></div>
+    </div>
+    <div class="card">
+      <div class="card-media term">
+        <span class="caption">Illustrative — IDOR pattern</span>
+        <pre>GET /api/user/8271/profile
+Authorization: Bearer &lt;token&gt;
+&lt;- 200 OK  { "user_id": 8271, ... }
+
+GET /api/user/8272/profile
+Authorization: Bearer &lt;<span class="dim">same token</span>&gt;
+&lt;- 200 OK  { "user_id": 8272, ... } <span class="bad">← should be 403</span></pre>
+      </div>
+      <div>
+        <div class="tag">REPORTED &amp; ACKNOWLEDGED</div>
+        <h3>Security Disclosure</h3>
+        <p>Live-exploited IDOR in a public repo, verified against the running app, disclosed through the right channel same-day.</p>
+      </div>
+      <div class="meta">write-up on request</div>
+    </div>
+    <div class="card">
+      <div class="card-media">
+        <img src="images/company-brain.png" alt="Company Brain dark-mode chat and knowledge-graph interface" loading="lazy">
+      </div>
+      <div>
+        <div class="tag">2ND PLACE — START HACK ZÜRICH</div>
+        <h3>Company Brain</h3>
+        <p>A second brain so a long-tenure employee's knowledge doesn't walk out the door on retirement. Graph retrieval over vector-only RAG.</p>
+      </div>
+      <div class="meta">presented to SIX Group</div>
+    </div>
+    <div class="card">
+      <div class="card-media spark">
+        <span class="caption">On-device signal · elder-care sensing</span>
+        <svg viewBox="0 0 300 100" preserveAspectRatio="none">
+          <polyline points="0,55 15,52 30,58 45,50 60,60 75,30 90,65 105,45 120,20 135,58 150,42 165,48 180,25 195,62 210,38 225,52 240,20 255,58 270,44 285,50 300,40"
+            fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="tag">ONGOING — POST-HACKATHON</div>
+        <h3>Guardian</h3>
+        <p>On-device signal processing for elder-care monitoring. Continued past StartHack Hong Kong into real customer discovery.</p>
+      </div>
+      <div class="meta">structured interviews · feasibility review</div>
+    </div>
+  </div>
+
+  <footer>
+    <span>© 2026</span>
+    <span><a href="cv.pdf">CV</a> · <a href="https://github.com/narangtanmay">GitHub</a> · <a href="https://www.linkedin.com/in/tanmaynarang/">LinkedIn</a> · <a href="mailto:tanmay.narang10@gmail.com">Email</a></span>
+  </footer>
+</div>
+</body>
 </html>
