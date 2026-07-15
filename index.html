@@ -79,29 +79,16 @@
   }
   .card-media img{ width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
 
-  .card-media.term{ flex-direction:column; align-items:stretch; justify-content:flex-start; padding:0; }
-  .term-bar{ display:flex; align-items:center; gap:.4rem; padding:.65rem .9rem; border-bottom:1px solid #232323; flex-shrink:0; }
-  .term-bar i{ width:.55rem; height:.55rem; border-radius:50%; display:block; }
-  .term-bar i:nth-child(1){ background:#FF5F57; }
-  .term-bar i:nth-child(2){ background:#FEBC2E; }
-  .term-bar i:nth-child(3){ background:#28C840; }
-  .term-bar span{
-    margin-left:auto; font-family:ui-monospace,"SF Mono",Menlo,monospace;
-    font-size:.62rem; letter-spacing:.06em; color:#6B6B6B;
-  }
-  .card-media.term pre{
-    margin:0; padding:1rem 1.3rem; font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.72rem;
-    line-height:1.65; color:#8FE8A6; white-space:pre-wrap;
-  }
-  .card-media.term .bad{ color:#FF6A4D; }
-  .card-media.term .dim{ color:#6B6B6B; }
-
-  .card-media.spark{ background:var(--bg); flex-direction:column; align-items:stretch; padding:1.1rem 1.3rem; }
+  .card-media.spark{ background:var(--bg); flex-direction:column; align-items:stretch; justify-content:center; padding:1.1rem 1.3rem; min-height:200px; }
   .card-media.spark .caption{
     font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.62rem; letter-spacing:.08em;
     color:var(--muted); text-transform:uppercase; margin-bottom:.4rem;
   }
   .card-media.spark svg{ width:100%; height:100%; }
+  .card-media.spark pre{
+    margin:0; font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.72rem;
+    line-height:1.7; color:var(--ink); white-space:pre;
+  }
 
   footer{
     border-top:1px solid var(--line); padding:1.6rem 0 3rem;
@@ -125,20 +112,20 @@
   </nav>
 
   <div class="tags">
-    <span>SECURITY</span><span>APPLIED AI</span><span>VERIFIED</span><span>2026</span>
+    <span>SECURITY</span><span>APPLIED AI</span><span>TUM</span><span>2026</span>
   </div>
 
   <h1>FIND. <span class="a">VERIFY.</span><br>SHIP.</h1>
 
   <div class="brief">
-    <p>Everything below got checked against something real — a graph, a backtest, a live system — before I called it done.</p>
+    <p>CS student at TUM. Security-tooling HiWi at Fraunhofer AISEC. Projects I've shipped and the places they placed.</p>
     <a class="cta" href="mailto:tanmay.narang10@gmail.com">GET IN TOUCH</a>
   </div>
 
   <div class="triad">
-    <div><h3>Research</h3><p>Fraunhofer AISEC — testing whether LLMs can be trusted to flag security-relevant code via Code Property Graphs.</p></div>
+    <div><h3>Research</h3><p>Fraunhofer AISEC — static code analysis on CPG and Codyze, writing security-rule checks in Kotlin.</p></div>
     <div><h3>Build</h3><p>Hackathon-tested systems: exec-comp anomaly detection, graph-based knowledge retrieval, on-device elder-care sensing.</p></div>
-    <div><h3>Verify</h3><p>Found and responsibly disclosed a live authorization exploit — confirmed end-to-end, not just in source.</p></div>
+    <div><h3>Community</h3><p>Member of h4tum e.V., TUM's CTF and IT-security student club.</p></div>
   </div>
 
   <div class="section-label">FEATURED WORK</div>
@@ -152,27 +139,26 @@
       <div>
         <div class="tag">TRACK WINNER — TUM SCIENCE HACKATHON</div>
         <h3>ProxyEngine</h3>
-        <p>Flags excessive executive pay from unstructured disclosures. Backtested against real shareholder revolts at Bayer, Continental, Software AG — 129 real companies, live on ORBIS data.</p>
+        <p>Executive-compensation benchmarking pipeline built on ORBIS data, with peer-clustering (K=7) for comparative visualization.</p>
       </div>
       <div class="meta"><a href="https://github.com/narangtanmay/proxyengine">github.com/narangtanmay/proxyengine</a></div>
     </div>
     <div class="card">
-      <div class="card-media term">
-        <div class="term-bar"><i></i><i></i><i></i><span>idor.http — illustrative</span></div>
-        <pre>GET /api/user/8271/profile
-Authorization: Bearer &lt;token&gt;
-&lt;- 200 OK  {"user_id": 8271, ...}
-
-GET /api/user/8272/profile
-Authorization: Bearer &lt;<span class="dim">same token</span>&gt;
-<span class="bad">&lt;- 200 OK  {"user_id": 8272, ...}  // expected 403</span></pre>
+      <div class="card-media spark">
+        <span class="caption">Double Ratchet · session setup</span>
+        <pre>Alice                     Bob
+  |--- X25519 pubkey ------>|
+  |<------- X25519 pubkey --|
+  DH ratchet init      DH ratchet init
+  |--- msg (chain #1) ----->|
+  |<----- msg (chain #1) ---|</pre>
       </div>
       <div>
-        <div class="tag">REPORTED &amp; ACKNOWLEDGED</div>
-        <h3>Security Disclosure</h3>
-        <p>Live-exploited IDOR in a public repo, verified against the running app, disclosed through the right channel same-day.</p>
+        <div class="tag">IN DEVELOPMENT — PERSONAL PROJECT</div>
+        <h3>P2P Secure Chat</h3>
+        <p>End-to-end encrypted P2P chat in Go: Signal protocol (Double Ratchet, X25519), a custom TCP transport layer, mutex-based concurrency control.</p>
       </div>
-      <div class="meta">write-up on request</div>
+      <div class="meta">source private, in progress</div>
     </div>
     <div class="card">
       <div class="card-media">
@@ -181,7 +167,7 @@ Authorization: Bearer &lt;<span class="dim">same token</span>&gt;
       <div>
         <div class="tag">2ND PLACE — START HACK ZÜRICH</div>
         <h3>Company Brain</h3>
-        <p>A second brain so a long-tenure employee's knowledge doesn't walk out the door on retirement. Graph retrieval over vector-only RAG.</p>
+        <p>RAG knowledge-graph system (Neo4j) for SIX Financial that captures tacit regulatory knowledge. A recursive "teach the brain" loop distills customer conversations into permanent graph entries.</p>
       </div>
       <div class="meta">presented to SIX Group</div>
     </div>
@@ -196,7 +182,7 @@ Authorization: Bearer &lt;<span class="dim">same token</span>&gt;
       <div>
         <div class="tag">ONGOING — POST-HACKATHON</div>
         <h3>Guardian</h3>
-        <p>On-device signal processing for elder-care monitoring. Continued past StartHack Hong Kong into real customer discovery.</p>
+        <p>Camera-free elder-care monitoring: passive mmWave radar, drift detection, prioritized fall-detection interrupt. Runs fully on-device (Ollama/Gemma, zero bytes to the cloud). Continued past the hackathon into customer discovery.</p>
       </div>
       <div class="meta">structured interviews · feasibility review</div>
     </div>
