@@ -5,193 +5,818 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tanmay Narang</title>
 <meta name="description" content="CS student at TUM, security/applied-AI researcher at Fraunhofer AISEC.">
+
+<!-- Modern Typography: Inter -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-  :root{ --bg:#FAFAFA; --ink:#0A0A0A; --line:#DCDCDC; --muted:#6B6B6B; --accent:#FF3D1A; }
-  @media (prefers-color-scheme: dark){ :root{ --bg:#0A0A0A; --ink:#FAFAFA; --line:#2A2A2A; --muted:#9A9A9A; --accent:#FF5A38; } }
-  :root[data-theme="dark"]{ --bg:#0A0A0A; --ink:#FAFAFA; --line:#2A2A2A; --muted:#9A9A9A; --accent:#FF5A38; }
-  :root[data-theme="light"]{ --bg:#FAFAFA; --ink:#0A0A0A; --line:#DCDCDC; --muted:#6B6B6B; --accent:#FF3D1A; }
-
-  *{box-sizing:border-box;}
-  body{
-    margin:0; background:var(--bg); color:var(--ink);
-    font-family:"Helvetica Neue", Arial, sans-serif;
-  }
-  .wrap{ max-width:1400px; margin:0 auto; padding:0 2.5rem; }
-
-  nav{
-    display:flex; justify-content:space-between; align-items:center;
-    padding:1.6rem 0; border-bottom:1px solid var(--line);
-  }
-  nav .name{ font-weight:800; font-size:1.15rem; letter-spacing:-.01em; }
-  nav .loc{ font-size:.8rem; color:var(--muted); border-left:1px solid var(--line); padding-left:1rem; margin-left:1rem; }
-  nav .brand{ display:flex; align-items:center; }
-
-  .tags{
-    display:flex; justify-content:space-between; padding:1.4rem 0;
-    font-size:.72rem; font-weight:600; letter-spacing:.08em; color:var(--muted);
+  :root {
+    --bg: #181818;
+    --ink: #ffffff;
+    --muted: #969696;
+    --accent: #da291c; /* Rosso Corsa */
+    --accent-hover: #b01e0a;
+    --border: #303030; /* Hairline */
+    --card-bg: #1e1e1e;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   }
 
-  h1{
-    font-size:clamp(2.6rem, 8.6vw, 8.4rem); font-weight:800; line-height:.98;
-    letter-spacing:-.03em; margin:0; text-wrap:balance;
-  }
-  h1 .a{ color:var(--accent); }
-
-  .brief{
-    display:flex; justify-content:space-between; align-items:flex-end; gap:2rem;
-    border-top:1px solid var(--line); padding:1.6rem 0 3rem; flex-wrap:wrap;
-  }
-  .brief p{ max-width:42ch; color:var(--muted); font-size:.95rem; margin:0; }
-  .cta{
-    background:var(--accent); color:#fff; border:none; padding:.9rem 1.6rem;
-    font-size:.72rem; font-weight:700; letter-spacing:.08em; white-space:nowrap; cursor:pointer;
-    text-decoration:none; display:inline-block;
+  * { box-sizing: border-box; }
+  
+  body {
+    margin: 0;
+    background: 
+      radial-gradient(circle at 80% 20%, rgba(218, 41, 28, 0.04), transparent 45%),
+      radial-gradient(circle at 10% 80%, rgba(218, 41, 28, 0.02), transparent 40%),
+      #181818;
+    color: var(--ink);
+    font-family: var(--font);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
   }
 
-  .triad{
-    display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--line);
-  }
-  .triad div{ padding:2.2rem 0; }
-  .triad div:not(:last-child){ border-right:1px solid var(--line); padding-right:1.5rem; }
-  .triad div:not(:first-child){ padding-left:1.5rem; }
-  .triad h3{ font-size:1.05rem; font-weight:800; margin:0 0 .6rem; }
-  .triad p{ font-size:.85rem; color:var(--muted); margin:0; }
-
-  .section-label{
-    font-size:.72rem; font-weight:600; letter-spacing:.08em; color:var(--muted);
-    border-top:1px solid var(--line); padding-top:2rem; margin-top:1rem;
-  }
-  h2.section-title{ font-size:2.4rem; font-weight:800; letter-spacing:-.02em; margin:.4rem 0 2rem; }
-
-  .grid{ display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); margin-bottom:5rem; }
-  .card{ background:var(--bg); padding:2.2rem; min-height:220px; display:flex; flex-direction:column; justify-content:space-between; overflow:hidden; }
-  .card .tag{ font-size:.7rem; font-weight:700; letter-spacing:.06em; color:var(--accent); }
-  .card{ border-left:3px solid var(--accent); }
-  .card h3{ font-size:1.5rem; font-weight:800; margin:.8rem 0 .6rem; letter-spacing:-.01em; }
-  .card p{ font-size:.88rem; color:var(--muted); margin:0; }
-  .card .meta{ font-size:.75rem; color:var(--muted); margin-top:1.2rem; }
-  .card .meta a{ color:var(--muted); }
-
-  .card-media{
-    margin:-2.2rem -2.2rem 1.4rem; aspect-ratio:16/10; overflow:hidden;
-    border-bottom:1px solid var(--line); background:#0A0A0A;
-    display:flex; align-items:center; justify-content:center; position:relative;
-  }
-  .card-media img{ width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
-
-  .card-media.spark{ background:var(--bg); flex-direction:column; align-items:stretch; justify-content:center; padding:1.1rem 1.3rem; min-height:200px; }
-  .card-media.spark .caption{
-    font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.62rem; letter-spacing:.08em;
-    color:var(--muted); text-transform:uppercase; margin-bottom:.4rem;
-  }
-  .card-media.spark svg{ width:100%; height:100%; }
-  .card-media.spark pre{
-    margin:0; font-family:ui-monospace,"SF Mono",Menlo,monospace; font-size:.72rem;
-    line-height:1.7; color:var(--ink); white-space:pre;
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.25s ease;
   }
 
-  footer{
-    border-top:1px solid var(--line); padding:1.6rem 0 3rem;
-    display:flex; justify-content:space-between; font-size:.8rem; color:var(--muted); flex-wrap:wrap; gap:.5rem;
+  .wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
   }
-  footer a{ color:var(--ink); }
 
-  @media (max-width: 640px){
-    .triad{ grid-template-columns:1fr; }
-    .triad div:not(:last-child){ border-right:none; border-bottom:1px solid var(--line); padding-right:0; padding-bottom:1.5rem; }
-    .triad div:not(:first-child){ padding-left:0; padding-top:1.5rem; }
-    .grid{ grid-template-columns:1fr; }
+  /* Typography Rules (Ferrari-spec inspired) */
+  .display-mega {
+    font-size: clamp(2.5rem, 7.5vw, 5rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+
+  .display-lg {
+    font-size: clamp(1.8rem, 4vw, 2.25rem);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+
+  .display-md {
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .label-tracked {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+    display: block;
+  }
+
+  .sub-label {
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 400;
+    display: block;
+    margin-top: 0.25rem;
+  }
+
+  .body-text {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  /* Navigation */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  nav .brand {
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  nav .menu {
+    display: flex;
+    gap: 2.5rem;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.65px;
+    text-transform: uppercase;
+  }
+
+  nav .menu a {
+    color: var(--muted);
+  }
+
+  nav .menu a:hover {
+    color: var(--ink);
+  }
+
+  nav .cta-link {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border: 1px solid var(--border);
+    padding: 0.5rem 1rem;
+    transition: all 0.25s ease;
+  }
+
+  nav .cta-link:hover {
+    border-color: var(--ink);
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  /* Sections Layout */
+  .section-pad {
+    padding: 6rem 0;
+  }
+  
+  .section-border-top {
+    border-top: 1px solid var(--border);
+  }
+
+  /* Typography-First About Hero */
+  .about-widescreen {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .about-content {
+    max-width: 800px;
+  }
+
+  .body-text-hero {
+    font-size: clamp(1.15rem, 2.2vw, 1.35rem);
+    color: var(--muted);
+    font-weight: 400;
+    line-height: 1.6;
+    margin: 1.5rem 0 2rem;
+  }
+
+  .about-stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+  }
+
+  .stat-cell {
+    padding-bottom: 0.5rem;
+  }
+
+  .stat-cell p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  /* Hero Section (Guardian Lead) */
+  .hero-container {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .hero-media {
+    border: 1px solid var(--border);
+    background: #0f0f0f;
+    aspect-ratio: 1.65/1;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    transition: border-color 0.4s ease;
+  }
+
+  .hero-media:hover {
+    border-color: var(--muted);
+  }
+
+  .hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .hero-media:hover img {
+    transform: scale(1.02);
+  }
+
+  .hero-info {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .hero-info p {
+    margin: 0;
+  }
+
+  .hero-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .hero-bullets li {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .hero-bullets li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+  }
+
+  /* Button System */
+  .btn-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .btn {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    height: 48px;
+    padding: 0 2rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0px; /* Sharp corners */
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--ink);
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-hover);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--ink);
+  }
+
+  .btn-outline:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  /* Grid Layout for supporting projects */
+  .grid-header {
+    margin-bottom: 3.5rem;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    border-radius: 0px;
+    overflow: hidden;
+    transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card:hover {
+    border-color: var(--muted);
+    background: #1f1f1f;
+  }
+
+  .card-media {
+    width: 100%;
+    aspect-ratio: 1.6/1;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    background: #0d0d0d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card:hover .card-media img {
+    transform: scale(1.02);
+  }
+
+  /* Monospace terminal style for P2P Secure Chat */
+  .card-media.terminal {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    padding: 1.25rem;
+    font-family: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+    font-size: 11px;
+    color: #e0e0e0;
+    background: #0a0a0a;
+    position: relative;
+  }
+
+  .card-media.terminal::before {
+    content: "TCP TRANSPORT LAYER / DOUBLE RATCHET SESSION";
+    display: block;
+    font-size: 9px;
+    letter-spacing: 1px;
+    color: var(--muted);
+    border-bottom: 1px solid #222;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+
+  .card-media.terminal pre {
+    margin: 0;
+    line-height: 1.5;
+    white-space: pre;
+    color: #c5c8c6;
+  }
+
+  .card-media.terminal .accent-text {
+    color: var(--accent);
+  }
+
+  .card-body {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 0.75rem;
+  }
+
+  .card-body h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .card-body p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .card-footer {
+    padding: 1.5rem 2rem;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .card-footer a {
+    color: var(--muted);
+  }
+
+  .card-footer a:hover {
+    color: var(--ink);
+  }
+
+  /* Research / Community Triad */
+  .triad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+
+  .triad-col {
+    padding: 3rem 0;
+  }
+
+  .triad-col:not(:last-child) {
+    border-right: 1px solid var(--border);
+    padding-right: 2.5rem;
+  }
+
+  .triad-col:not(:first-child) {
+    padding-left: 2.5rem;
+  }
+
+  .triad-col h3 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .triad-col p {
+    margin: 0;
+    font-size: 13.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  /* Livery Band CTA Section (Full bleed breakout) */
+  .livery-band {
+    background: var(--accent);
+    color: #ffffff;
+    padding: 5rem 0;
+    margin: 4rem 0 0;
+    border-radius: 0px;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+
+  .livery-wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+
+  .livery-info {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 3rem 0 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+  }
+
+  footer .links {
+    display: flex;
+    gap: 2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  footer .links a {
+    color: var(--muted);
+  }
+
+  footer .links a:hover {
+    color: var(--ink);
+  }
+
+  /* Responsiveness */
+  @media (max-width: 1024px) {
+    .about-stats-row {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .hero-container {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .wrap {
+      padding: 0 1.5rem;
+    }
+    
+    .section-pad {
+      padding: 4rem 0;
+    }
+
+    nav {
+      height: auto;
+      flex-direction: column;
+      padding: 1.5rem 0;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    nav .menu {
+      gap: 1.5rem;
+    }
+
+    .project-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .triad {
+      grid-template-columns: 1fr;
+    }
+
+    .triad-col {
+      padding: 2rem 0;
+    }
+
+    .triad-col:not(:last-child) {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      padding-right: 0;
+    }
+
+    .triad-col:not(:first-child) {
+      padding-left: 0;
+    }
+
+    footer {
+      flex-direction: column-reverse;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+  }
+
+  /* Keyboard Accessibility Focus States */
+  a:focus-visible,
+  .btn:focus-visible,
+  .cta-link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
   }
 </style>
 </head>
 <body>
+
 <div class="wrap">
+  <!-- Navigation -->
   <nav>
-    <div class="brand"><span class="name">Tanmay Narang</span><span class="loc">MUNICH, DE</span></div>
-    <div class="loc">TUM · FRAUNHOFER AISEC</div>
+    <div class="brand">Tanmay Narang</div>
+    <div class="menu">
+      <a href="#about">About</a>
+      <a href="#hero">Lead Work</a>
+      <a href="#systems">Systems</a>
+      <a href="#activities">Activities</a>
+    </div>
+    <a class="cta-link" href="cv.pdf" target="_blank">CV (PDF)</a>
   </nav>
 
-  <div class="tags">
-    <span>SECURITY</span><span>APPLIED AI</span><span>TUM</span><span>2026</span>
-  </div>
-
-  <h1>FIND. <span class="a">VERIFY.</span><br>SHIP.</h1>
-
-  <div class="brief">
-    <p>CS student at TUM. Security-tooling HiWi at Fraunhofer AISEC. Projects I've shipped and the places they placed.</p>
-    <a class="cta" href="mailto:tanmay.narang10@gmail.com">GET IN TOUCH</a>
-  </div>
-
-  <div class="triad">
-    <div><h3>Research</h3><p>Fraunhofer AISEC — static code analysis on CPG and Codyze, writing security-rule checks in Kotlin.</p></div>
-    <div><h3>Build</h3><p>Hackathon-tested systems: exec-comp anomaly detection, graph-based knowledge retrieval, on-device elder-care sensing.</p></div>
-    <div><h3>Community</h3><p>Member of h4tum e.V., TUM's CTF and IT-security student club.</p></div>
-  </div>
-
-  <div class="section-label">FEATURED WORK</div>
-  <h2 class="section-title">Shipped &amp; Judged.</h2>
-
-  <div class="grid">
-    <div class="card">
-      <div class="card-media">
-        <img src="images/proxyengine.png" alt="ProxyEngine report screen showing pay-audit metrics for Bayer AG" loading="lazy">
+  <!-- Widescreen Typography About Hero -->
+  <section id="about" class="section-pad">
+    <div class="about-widescreen">
+      <div class="about-content">
+        <span class="label-tracked">CS Student &amp; Security Researcher</span>
+        <h1 class="display-mega">Tanmay Narang</h1>
+        <p class="body-text-hero">
+          CS student at TUM. HiWi at Fraunhofer AISEC, writing security checks for CPG and Codyze. Outside of that I build things and enter them into hackathons — most of the time they end when the hackathon does. One didn't.
+        </p>
+        <div class="btn-group">
+          <a href="mailto:tanmay.narang10@gmail.com" class="btn btn-primary">Get In Touch</a>
+          <a href="https://github.com/narangtanmay" class="btn btn-outline" target="_blank">GitHub</a>
+        </div>
       </div>
-      <div>
-        <div class="tag">TRACK WINNER — TUM SCIENCE HACKATHON</div>
-        <h3>ProxyEngine</h3>
-        <p>Executive-compensation benchmarking pipeline built on ORBIS data, with peer-clustering (K=7) for comparative visualization.</p>
+      
+      <div class="about-stats-row">
+        <div class="stat-cell">
+          <span class="label-tracked">Institution</span>
+          <p>TUM</p>
+          <span class="sub-label">Technical University of Munich</span>
+        </div>
+        <div class="stat-cell">
+          <span class="label-tracked">Research</span>
+          <p>Fraunhofer AISEC</p>
+          <span class="sub-label">Static analysis on CPG and Codyze</span>
+        </div>
+        <div class="stat-cell">
+          <span class="label-tracked">CTF Club</span>
+          <p>h4tum e.V.</p>
+          <span class="sub-label">TUM's student CTF and security club</span>
+        </div>
       </div>
-      <div class="meta"><a href="https://github.com/narangtanmay/proxyengine">github.com/narangtanmay/proxyengine</a></div>
     </div>
-    <div class="card">
-      <div class="card-media spark">
-        <span class="caption">Double Ratchet · session setup</span>
-        <pre>Alice                     Bob
-  |--- X25519 pubkey ------>|
-  |<------- X25519 pubkey --|
-  DH ratchet init      DH ratchet init
-  |--- msg (chain #1) ----->|
-  |<----- msg (chain #1) ---|</pre>
-      </div>
-      <div>
-        <div class="tag">IN DEVELOPMENT — PERSONAL PROJECT</div>
-        <h3>P2P Secure Chat</h3>
-        <p>End-to-end encrypted P2P chat in Go: Signal protocol (Double Ratchet, X25519), a custom TCP transport layer, mutex-based concurrency control.</p>
-      </div>
-      <div class="meta">source private, in progress</div>
-    </div>
-    <div class="card">
-      <div class="card-media">
-        <img src="images/company-brain.png" alt="Company Brain dark-mode chat and knowledge-graph interface" loading="lazy">
-      </div>
-      <div>
-        <div class="tag">2ND PLACE — START HACK ZÜRICH</div>
-        <h3>Company Brain</h3>
-        <p>RAG knowledge-graph system (Neo4j) for SIX Financial that captures tacit regulatory knowledge. A recursive "teach the brain" loop distills customer conversations into permanent graph entries.</p>
-      </div>
-      <div class="meta">presented to SIX Group</div>
-    </div>
-    <div class="card">
-      <div class="card-media spark">
-        <span class="caption">On-device signal · elder-care sensing</span>
-        <svg viewBox="0 0 300 100" preserveAspectRatio="none">
-          <polyline points="0,55 15,52 30,58 45,50 60,60 75,30 90,65 105,45 120,20 135,58 150,42 165,48 180,25 195,62 210,38 225,52 240,20 255,58 270,44 285,50 300,40"
-            fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-      <div>
-        <div class="tag">ONGOING — POST-HACKATHON</div>
-        <h3>Guardian</h3>
-        <p>Camera-free elder-care monitoring: passive mmWave radar, drift detection, prioritized fall-detection interrupt. Runs fully on-device (Ollama/Gemma, zero bytes to the cloud). Continued past the hackathon into customer discovery.</p>
-      </div>
-      <div class="meta">structured interviews · feasibility review</div>
-    </div>
-  </div>
+  </section>
 
+  <!-- Lead Hero (Guardian) -->
+  <section id="hero" class="section-pad section-border-top">
+    <div class="hero-container">
+      <div class="hero-media">
+        <img src="images/guardian.png" alt="Guardian application dashboard showing vital signals and routing check" loading="eager">
+      </div>
+      <div class="hero-info">
+        <div>
+          <span class="label-tracked">01 / Lead R&amp;D Project</span>
+          <h1 class="display-mega">GUARDIAN</h1>
+        </div>
+        <p class="body-text">
+          Camera- and cloud-free monitoring: translates passive mmWave radar data into eight daily signals for caregivers, with drift detection (cosine similarity over sqlite-vec) and a prioritized fall-detection interrupt under 10 seconds. Inference runs fully on-device on Ollama/Gemma 4.
+        </p>
+        <ul class="hero-bullets">
+          <li>Passive mmWave radar signal processing</li>
+          <li>Local Gemma inference — zero bytes to the cloud</li>
+          <li>Past the hackathon now: structured interviews, feasibility review with a hardware advisor</li>
+        </ul>
+        <div class="btn-group">
+          <a href="guardian-pitch.pdf" class="btn btn-primary" target="_blank">Read the Pitch Deck</a>
+          <a href="https://github.com/MaiDormo/Guardian" class="btn btn-outline" target="_blank">View GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shipped Systems Grid -->
+  <section id="systems" class="section-pad section-border-top">
+    <div class="grid-header">
+      <span class="label-tracked">02 / Shipped &amp; Validated</span>
+      <h2 class="display-lg">The Systems</h2>
+    </div>
+
+    <div class="project-grid">
+      <!-- Card: Company Brain -->
+      <div class="card">
+        <div class="card-media">
+          <img src="images/company-brain.png" alt="Company Brain knowledge graph interface and chat window" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="label-tracked">2nd Place — Start Hack Zürich</span>
+          <h3>Company Brain</h3>
+          <p>
+            RAG knowledge-graph system (Neo4j) for SIX Financial that captures tacit regulatory knowledge. A recursive "teach the brain" loop distills customer conversations into permanent graph entries.
+          </p>
+        </div>
+        <div class="card-footer">
+          <a href="company-brain-pitch.pdf" target="_blank">Presented to SIX Group (Pitch Deck)</a>
+          <span>Neo4j / RAG</span>
+        </div>
+      </div>
+
+      <!-- Card: ProxyEngine -->
+      <div class="card">
+        <div class="card-media">
+          <img src="images/proxyengine.png" alt="ProxyEngine pay-audit dashboard displaying corporate data" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="label-tracked">Track Winner — TUM Science Hackathon</span>
+          <h3>ProxyEngine</h3>
+          <p>
+            Executive-pay benchmarking pipeline, shipped as "Aequitas," built on ORBIS data. Peer-clustering (K=7) groups comparable firms for the pay comparison.
+          </p>
+        </div>
+        <div class="card-footer">
+          <a href="https://github.com/narangtanmay/proxyengine" target="_blank">github.com/narangtanmay/proxyengine</a>
+          <span>Python / ORBIS</span>
+        </div>
+      </div>
+
+      <!-- Card: The AI Scientist -->
+      <div class="card">
+        <div class="card-media">
+          <img src="images/aiscientist.png" alt="The AI Scientist dashboard showing experimental plan verification metrics" loading="lazy">
+        </div>
+        <div class="card-body">
+          <span class="label-tracked">Featured Submission — 5th Global AI Hackathon</span>
+          <h3>The AI Scientist</h3>
+          <p>
+            Backend work on a 7-agent system (Team Agentic Labmate) that turns a hypothesis into a full experiment plan — protocol, budget, timeline, validation — grounded in a GraphRAG knowledge graph built from Semantic Scholar papers.
+          </p>
+        </div>
+        <div class="card-footer">
+          <a href="https://github.com/narangtanmay/agentic-labmate" target="_blank">github.com/narangtanmay/agentic-labmate</a>
+          <span>Multi-Agent / GraphRAG</span>
+        </div>
+      </div>
+
+      <!-- Card: P2P Secure Chat -->
+      <div class="card">
+        <div class="card-media terminal">
+          <pre>Alice                            Bob
+  |----- X25519 Pubkey ----------&gt;|
+  |&lt;---- X25519 Pubkey -----------|
+  <span class="accent-text">[DH Ratchet Init]</span>       <span class="accent-text">[DH Ratchet Init]</span>
+  |                               |
+  |--- Encrypted Msg (Chain #1) --&gt;|
+  |&lt;-- Encrypted Msg (Chain #1) --|</pre>
+        </div>
+        <div class="card-body">
+          <span class="label-tracked">In Development — Personal Project</span>
+          <h3>P2P Secure Chat</h3>
+          <p>
+            End-to-end encrypted P2P chat in Go: Signal protocol (Double Ratchet, X25519), a custom TCP transport layer, mutex-based concurrency control.
+          </p>
+        </div>
+        <div class="card-footer">
+          <span>Source Private, In Progress</span>
+          <span>Go / Cryptography</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research / Community Triad -->
+  <section id="activities" class="section-pad section-border-top">
+    <div class="grid-header">
+      <span class="label-tracked">03 / Core Competencies</span>
+      <h2 class="display-lg">Activities &amp; Research</h2>
+    </div>
+
+    <div class="triad">
+      <div class="triad-col">
+        <h3>01 / Research</h3>
+        <p>
+          HiWi at Fraunhofer AISEC — static analysis on CPG and Codyze. I write the Kotlin rules that check for security bugs.
+        </p>
+      </div>
+      <div class="triad-col">
+        <h3>02 / Build</h3>
+        <p>
+          Hackathon-tested systems: pay-anomaly detection, graph-based knowledge retrieval, on-device elder-care sensing.
+        </p>
+      </div>
+      <div class="triad-col">
+        <h3>03 / Community</h3>
+        <p>
+          Member of h4tum e.V., TUM's CTF and IT-security student club.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Livery Band Pre-Footer CTA -->
+  <section class="livery-band">
+    <div class="livery-wrap">
+      <div class="livery-info">
+        <span class="label-tracked" style="color: #ffffff; opacity: 0.9;">04 / Collaboration</span>
+        <h2 class="display-lg" style="margin-top: 0.5rem; color: #ffffff; margin-bottom: 0;">Let's pressure-test a system.</h2>
+      </div>
+      <a href="mailto:tanmay.narang10@gmail.com" class="btn btn-outline" style="border-color: #ffffff; color: #ffffff;">Send Message</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <span>© 2026</span>
-    <span><a href="https://github.com/narangtanmay">GitHub</a> · <a href="https://www.linkedin.com/in/tanmaynarang/">LinkedIn</a> · <a href="mailto:tanmay.narang10@gmail.com">Email</a></span>
+    <span>&copy; 2026 Tanmay Narang</span>
+    <div class="links">
+      <a href="https://github.com/narangtanmay" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/tanmaynarang/" target="_blank">LinkedIn</a>
+      <a href="mailto:tanmay.narang10@gmail.com">Email</a>
+    </div>
   </footer>
 </div>
+
 </body>
 </html>
